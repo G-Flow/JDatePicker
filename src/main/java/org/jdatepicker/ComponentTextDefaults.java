@@ -73,14 +73,14 @@ public final class ComponentTextDefaults {
 
         private String property;
         private String kind;
-        private Integer index;
+        private int index;
 
         private Key(String property, String kind) {
             this.property = property;
             this.kind = kind;
         }
 
-        private Key(String property, String kind, Integer index) {
+        private Key(String property, String kind, int index) {
             this.property = property;
             this.kind = kind;
             this.index = index;
@@ -94,7 +94,7 @@ public final class ComponentTextDefaults {
             return kind;
         }
 
-        public Integer getIndex() {
+        public int getIndex() {
             return index;
         }
 
@@ -157,7 +157,7 @@ public final class ComponentTextDefaults {
         }
         if (text == null && "dow".equals(key.getKind())) {
             Calendar c = Calendar.getInstance();
-            c.set(Calendar.DAY_OF_WEEK, key.getIndex());
+            c.set(Calendar.DAY_OF_WEEK, key.getIndex() + 1);
             ComponentFormatDefaults defaults = ComponentFormatDefaults.getInstance();
             DateFormat dowFormat = defaults.getFormat(ComponentFormatDefaults.Key.DOW_HEADER);
             text = dowFormat.format(c.getTime());

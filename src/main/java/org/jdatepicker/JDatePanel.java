@@ -133,7 +133,8 @@ public class JDatePanel extends JComponent implements DatePanel {
         return new UtilCalendarModel();
     }
 
-    private static DateModel<Calendar> createModel(Calendar value) {
+    @SuppressWarnings("unused")
+	private static DateModel<Calendar> createModel(Calendar value) {
         return new UtilCalendarModel(value);
     }
 
@@ -748,7 +749,7 @@ public class JDatePanel extends JComponent implements DatePanel {
             Calendar selectedCal = Calendar.getInstance();
             selectedCal.set(internalModel.getModel().getYear(), internalModel.getModel().getMonth(), internalModel.getModel().getDay());
 
-            int cellDayValue = (Integer) value;
+            int cellDayValue = ((Integer) value).intValue();
             int lastDayOfMonth = selectedCal.getActualMaximum(Calendar.DAY_OF_MONTH);
 
             // Other month
@@ -873,7 +874,7 @@ public class JDatePanel extends JComponent implements DatePanel {
 
                     // check constraints
                     int oldDay = internalModel.getModel().getDay();
-                    internalModel.getModel().setDay(date);
+                    internalModel.getModel().setDay(date.intValue());
                     if (!checkConstraints(internalModel.getModel())) {
                         // rollback
                         internalModel.getModel().setDay(oldDay);
@@ -1066,7 +1067,7 @@ public class JDatePanel extends JComponent implements DatePanel {
             int dowForFirst = firstOfMonth.get(Calendar.DAY_OF_WEEK);
             int daysBefore = lookup()[dowForFirst - 1];
 
-            return series - daysBefore;
+            return Integer.valueOf(series - daysBefore);
         }
 
         /**
